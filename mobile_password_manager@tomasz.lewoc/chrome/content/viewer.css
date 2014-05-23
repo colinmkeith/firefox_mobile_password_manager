@@ -1,0 +1,289 @@
+/*
+ * Mobile Password Manager for Firefox for Android
+ */
+
+body, table, tr, th, td, div, img, span {
+	border-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+table {
+	border-spacing: 0;
+	table-layout: fixed;
+}
+
+th, td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*
+ * ======== the "action bar" ========
+ */
+
+table.action_bar_wrapper {
+	width: 100%;
+	border-bottom: 2pt solid #d1d1d1;
+	background: #e6e6e6;
+}
+
+table.action_bar_wrapper div {
+	display: inline-block;
+	text-align: center;
+	vertical-align: baseline;
+	font-family: Roboto, Arial, sans-serif;
+	padding: 5pt 8pt 5pt 8pt;
+	font-size: 13pt;
+	line-height: 23pt;
+}
+
+table.action_bar_wrapper td {
+	text-overflow: clip;
+	text-align: left;
+}
+
+table.action_bar_wrapper td:last-child {
+	text-align: right;
+}
+
+table.action_bar_wrapper img {
+	vertical-align: bottom;
+	width: 23pt;
+	height: 23pt;
+}
+
+table.action_bar_wrapper div.action_bar_border_button {
+	padding-right: 10pt; /* increased by 1pt more than just the background's width for a more comfortable display density */
+	background-image: url("chrome://mobile_password_manager/content/assets/cbcbcb pixel.png");
+	background-size: 1pt 23pt;
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+
+table.action_bar_wrapper div.action_bar_button:active, table.action_bar_wrapper div.action_bar_border_button:active {
+	background: #77c4e1;
+}
+
+/*
+ * ======== the viewer "activity" ========
+ */
+
+div#header_table_wrapper {
+	height: 34pt;
+	 /* the scrollbar is useless, but ensures that header_table's width will always match that of pw_table;
+	  * it is invisible and thus a non-issue on Android where it is invisible,
+	  * and will be covered by a blank div (scrollbar_cover) on desktop */
+	overflow-y: scroll;
+}
+
+div#scrollbar_cover {
+	position: absolute;
+	z-index: 1;
+	top: 34.5pt;
+	right: 0;
+	height: 0;
+	width: 20px; /* scrollbar width (17px) plus some leeway, this will only be used on desktops so no need to conserve every last pixel of space */
+	border-bottom: 2pt solid #d1d1d1;
+	border-top: 26.5pt solid #f6f6f6;
+}
+
+table#header_table {
+	border-bottom: 2pt solid #d1d1d1;
+	width: 100%;
+}
+ 
+div#pw_table_wrapper {
+	position: absolute;
+	z-index: 0;
+	top: 62.5pt;
+	bottom: 0pt;
+	width: 100%;
+	overflow-y: scroll; /* scroll instead of auto to ensure that pw_table's width will always match that of header_table */
+}
+
+table#pw_table {
+	width: 100%;
+}
+
+table#header_table tr {
+	background: #f6f6f6;
+}
+
+table#header_table th:nth-child(even) {
+	background: #ececec;
+}
+
+table#pw_table tr:nth-child(even) {
+	background: #f6f6f6;
+}
+
+table#pw_table tr:nth-child(even) td:nth-child(even) {
+	background: #ececec;
+}
+
+table#pw_table tr:nth-child(odd) td:nth-child(even) {
+	background: #f6f6f6;
+}
+
+table#header_table th, table#pw_table td {
+	width: 34%;
+	padding: 4pt 6pt 4pt 6pt;
+	text-align: left;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 12pt;
+	line-height: 18pt; /* match the image */
+	vertical-align: baseline;
+}
+
+table#header_table th:first-child, table#pw_table td:first-child {
+	width: 39%;
+	padding-left: 8pt;
+}
+
+table#header_table th:last-child, table#pw_table td:last-child {
+	/* width: 27%; */
+	width: 62pt;
+	padding-right: 8pt;
+	text-overflow: clip;
+}
+
+table#header_table img, table#pw_table img {
+	width: 14pt;
+	height: 14pt;
+	background: #e6e6e6;
+	padding: 1pt;
+	border: 1pt solid #c0c0c0;
+	vertical-align: bottom;
+	margin-right: 2pt;
+}
+
+table#header_table img:active, table#pw_table img:active {
+	background: #77c4e1;
+}
+
+
+/*
+ * ======== the editor "activity" ========
+ */
+ 
+div#form_table_wrapper {
+	position: absolute;
+	z-index: 0;
+	top: 37pt; /* slightly more than the actual height of the "action bar" */
+	bottom: 0pt;
+	width: 100%;
+	overflow: auto;
+}
+
+table#form_table {
+	width: 100%;
+	padding: 0 6pt 6pt 6pt;
+}
+
+table#form_table td {
+	width: 100%;
+	padding: 4pt 6pt 4pt 6pt;
+	text-align: left;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 12pt;
+}
+
+table#form_table td:first-child {
+	color: #333333;
+	width: 95pt;
+}
+
+table#form_table input {
+	width: 100%;
+	padding: 2pt;
+	margin: 0;
+	border: 1pt solid #c0c0c0;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 12pt;
+}
+
+table#form_table select {
+	width: auto;
+	padding: 2pt;
+	margin: 0;
+	border: 1pt solid #c0c0c0;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 12pt;
+}
+
+table#form_table img {
+	width: 14pt;
+	height: 14pt;
+	background: #e6e6e6;
+	padding: 1pt;
+	border: 1pt solid #c0c0c0;
+	vertical-align: middle;
+}
+
+table#form_table img:active {
+	background: #77c4e1;
+}
+
+/*
+ * ======== miscellany ========
+ */
+
+div#tip_container {
+	display: table;
+	height: 45pt;
+	width: 100%;
+	background: #e2e9ee;
+	overflow-y: hidden;
+	text-overflow: clip;
+}
+
+div#tip_container p {
+	padding-left: 15pt;
+	padding-right: 25pt;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 11pt;
+	color: #48484b;
+}
+
+img#tip_close_button {
+	position: absolute;
+	z-index: 1;
+	top: 45pt;
+	right: 6pt;
+	width: 19pt; /* 23 - 4 */
+	height: 19pt;
+	padding: 2pt; /* just to make it easier to click */
+}
+
+img#tip_close_button:active {
+	background: #77c4e1;
+}
+
+div#toaster { /* takes two slices of bread at a time */
+	position: absolute;
+	z-index: 1;
+	bottom: 40pt;
+	width: 60%;
+	margin-left: 20%;
+	display: table;
+	height: 50pt;
+	overflow-y: hidden;
+	text-overflow: clip;
+}
+
+div#toaster p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	padding-left: 8pt;
+	padding-right: 8pt;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 11pt;
+	color: #eeeeee;
+	background: #333333;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<script type="text/javascript" src="chrome://mobile_password_manager/content/viewer.js"></script>
+	<title>Mobile Password Manager</title>
+	<link rel="icon" type="image/png" href="chrome://mobile_password_manager/content/assets/hdpi.png" />
+	<link rel="stylesheet" type="text/css" href="chrome://mobile_password_manager/content/viewer.css" />
+	<link rel="prefetch" href="chrome://mobile_password_manager/content/editor.html" />
+	<!-- desktop Firefox won't mind the viewport, no need to conditionally create it in JS -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+
+<body onload="initializeSomeStuff()">
+<!--
+ * both "activities" are in this one document; switching between them is done by hiding divs
+ * I found this to be the best option, as navigating between separate documents
+ * took ages on a phone - prefetch links didn't help
+-->
+<div id="viewer_activity"> 
+	
+	<table class="action_bar_wrapper" border="">
+		<!-- make table actually have 4 columns so that the colspan attribute used below is valid -->
+		<tr style="display: none"><td></td><td></td><td></td><td></td></tr>
+		<tr>
+			<td colspan="3"> <!-- makes the cell take up more space, so that its contents aren't cropped prematurely -->
+				<div id="action_bar_title">
+					<img src="chrome://mobile_password_manager/content/assets/hdpi.png" alt="" />
+					<!-- Saved Passwords -->
+				</div>
+			</td>
+			<td>
+				<div id="add_button" class="action_bar_button" onclick="startEditing(event)">
+					<img id="add_image" src="chrome://mobile_password_manager/content/assets/new.png" alt="" /> <!-- alt will be set by JS here -->
+				</div>
+			</td>
+		</tr>
+	</table>
+	
+	<div id="header_table_wrapper">
+		<table id="header_table" border="">
+			<tr>
+				<th id="site_column_header"><!-- Site --></th>
+				<th id="username_column_header"><!-- Username --></th>
+				<th id="password_column_header"><!-- Password --></th>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="pw_table_wrapper">
+		<table id="pw_table" border="">
+		</table>
+	</div>
+	
+</div>
+
+<div id="editor_activity" style="display:none">
+
+	<table class="action_bar_wrapper" border="">
+		<tr style="display: none"><td></td><td></td><td></td><td></td></tr>
+		<tr>
+			<td>
+				<div id="editor_activity_title">
+					<!-- Adding --> <!-- changed to "Editing" by JS if appropriate -->
+				</div>
+			</td>
+			<td colspan="3">
+				<div id="action_bar_cancel_button" class="action_bar_border_button" onclick="clearAndCloseEditor()">
+					<img src="chrome://mobile_password_manager/content/assets/cancel.png" alt="" />
+					<!-- Cancel -->
+				</div>
+				<div id="action_bar_save_button"  class="action_bar_button" onclick="saveChanges()">
+					<img src="chrome://mobile_password_manager/content/assets/accept.png" alt="" />
+					<!-- Save -->
+				</div>
+			</td>
+		</tr>
+	</table>
+	
+	<div id="form_table_wrapper">
+		<form id="editor_form">
+		<table id="form_table" border="">
+			<tr>
+				<td id="form_type_label"><!-- Type --></td>
+				<td>
+					<select id="login_type" onchange="updateForm()">
+						<option id="web_form_option" value="web_form"><!-- Web form --></option>
+						<option id="http_auth_option" value="http_auth"><!-- HTTP authentication --></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td id="form_hostname_label"><!-- Hostname --></td>
+				<td>
+					<input id="in_hostname" type="text" maxlength="900" />
+				</td>
+			</tr>
+			<tr>
+				<td id="form_submit_label"><!-- Form submit URL --></td>
+				<td>
+					<input id="in_form_submit_url" type="text" maxlength="900" />
+				</td>
+			</tr>
+			<tr style="display: none">
+				<td id="form_realm_label"><!-- Realm --></td>
+				<td>
+					<input id="in_realm" type="text" disabled="disabled" maxlength="100" />
+				</td>
+			</tr>
+			<tr>
+				<td id="form_username_label"><!-- Username --></td>
+				<td>
+					<input id="in_username" type="text" maxlength="100" />
+				</td>
+			</tr>
+			<tr>
+				<td id="form_password_label"><!-- Password --></td>
+				<td>
+					<!-- local styles here because trying to achieve the same with global styles was messy -->
+					<table style="width: 100%"><tr><td style="width: 100%; padding: 0 13pt 0 0; text-overflow: clip;">
+						<input id="mobile_password_manager_cant_touch_this" type="password" maxlength="100" /> <!-- this id means the add-on's context menu item won't appear for this field -->
+					</td><td style="width: 18pt; padding: 0;">
+						<img id="toggle_image" src="chrome://mobile_password_manager/content/assets/show.png" alt="" onclick="togglePasswordVisibility(event)" />  <!-- alt will be set by JS here -->
+					</td></tr></table>
+				</td>
+			</tr>
+			<tr>
+				<td id="form_username_field_label"><!-- Username field --></td>
+				<td>
+					<input id="in_username_field" type="text" maxlength="100" />
+				</td>
+			</tr>
+			<tr>
+				<td id="form_password_field_label"><!-- Password field --></td>
+				<td>
+					<input id="in_password_field" type="text" maxlength="100" />
+				</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+
+</div>
+	
+</body>
+
+</html>

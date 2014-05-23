@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+    <Description about="urn:mozilla:install-manifest">
+		<em:id>mobile_password_manager@tomasz.lewoc</em:id>
+		<em:name>Mobile Password Manager</em:name>
+		<em:description>View and edit saved passwords on your phone, tablet or desktop.</em:description>
+		<em:creator>Tomasz Lewoc</em:creator>
+		<em:version>1.0.1</em:version>
+		<em:type>2</em:type>
+		<em:bootstrap>true</em:bootstrap>
+
+        <em:targetApplication>
+            <Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- desktop Firefox -->
+                <em:minVersion>21.0</em:minVersion>
+                <em:maxVersion>23.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+		
+        <em:targetApplication>
+            <Description>
+                <em:id>{aa3c5121-dab2-40e2-81ca-7ea25febc110}</em:id> <!-- Firefox for Android -->
+                <em:minVersion>21.0</em:minVersion>
+                <em:maxVersion>23.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+
+    </Description>
+</RDF>

@@ -1,0 +1,35 @@
+
+   The images under chrome/content/assets/, except
+   "show.png", "hide.png", "hdpi.png" and "cbcbcb pixel.png"
+   are from the Android Action Bar Icon Pack available at
+   http://developer.android.com/design/downloads/index.html
+   They came with a notice that says:
+   "You may use the materials in this file without restriction
+   to develop your apps and to use in your apps."
+   Some of them have been modified.
+
+   The images "icon.png" and "chrome/content/hdpi.png"
+   were created using this tool:
+   http://android-ui-utils.googlecode.com/hg/asset-studio/dist/icons-launcher.html
+   and are thus licensed under CC-BY 3.0 Unported
+   (http://creativecommons.org/licenses/by/3.0/).
+   See the site for attribution info.
+
+   "chrome/content/cbcbcb pixel.png" is ineligible for copyright
+   because it is trivial.
+
+   To all other files, the following applies:
+
+   Copyright 2013 Tomasz Lewoc
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use these files except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
