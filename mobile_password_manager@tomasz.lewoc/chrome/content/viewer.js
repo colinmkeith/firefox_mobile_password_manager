@@ -129,7 +129,56 @@ function initializeSomeStuff() {
 			preferences.setBoolPref("show_search_tip", false);
 		}
 
+    var filter = document.getElementById('filter');
+    if(filter) {
+      var filterWhich = document.getElementById('filterwhich');
+      if(filterWhich) {
+	      filterWhich.addEventListener("click", startFiltering, true);
+	      filterWhich.addEventListener("change", startFiltering, true);
+	      filter.addEventListener("keyup", startFiltering, true);
+      }
+    }
+
 	});
+}
+
+function startFiltering(event) {
+  var filterPattern = document.getElementById('filter').value;  
+  var filterWhich   = document.getElementById('filterwhich').value;  
+
+  var hiddenNodes   = document.querySelectorAll('#pw_table tr.filtered');
+  for(var i=0; i<hiddenNodes.length; i++) {
+    hiddenNodes[i].className = '';
+  }
+
+  if(!filterPattern) {
+    return;
+  }
+
+  var selector = '';
+
+  if(filterWhich == 1 || filterWhich == 2) {
+    selector = '#pw_table td:nth-child(1)';
+  }
+
+  if(filterWhich == 1 || filterWhich == 3) {
+    if(selector) {
+      select += ', ';
+    }
+    selector += '#pw_table td:nth-child(2)';
+  }
+
+  try {
+    var nodes = document.querySelectorAll(selector);
+    for(var i=0; i<nodes.length; i++) {
+      if(!nodes[i].innerHTML.match(filterPattern)) {
+        nodes[i].parentNode.className = 'filtered';
+      }
+    }
+  } catch(e) {
+    showTip("The pattern is invalid.");
+  }
+
 }
 
 /*
@@ -271,7 +320,7 @@ function showTip(tip) {
 		document.getElementById("form_table_wrapper").style.top = "82pt"; //increased by 45
 		document.getElementById("editor_activity").insertBefore(div, document.getElementById("form_table_wrapper"));
 	} else { //we're in the viewer
-		document.getElementById("pw_table_wrapper").style.top = "107pt"; //increased by 45
+		document.getElementById("pw_table_wrapper").style.top = "141pt"; //increased by 45 + 45
 		document.getElementById("viewer_activity").insertBefore(div, document.getElementById("header_table_wrapper"));
 	}
 	document.body.appendChild(imageButton);

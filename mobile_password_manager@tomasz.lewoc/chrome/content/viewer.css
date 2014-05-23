@@ -70,6 +70,7 @@ table.action_bar_wrapper div.action_bar_button:active, table.action_bar_wrapper 
  * ======== the viewer "activity" ========
  */
 
+div#filter_table_wrapper,
 div#header_table_wrapper {
 	height: 34pt;
 	 /* the scrollbar is useless, but ensures that header_table's width will always match that of pw_table;
@@ -89,24 +90,21 @@ div#scrollbar_cover {
 	border-top: 26.5pt solid #f6f6f6;
 }
 
+table#filter_table,
 table#header_table {
 	border-bottom: 2pt solid #d1d1d1;
 	width: 100%;
 }
- 
-div#pw_table_wrapper {
-	position: absolute;
-	z-index: 0;
-	top: 62.5pt;
-	bottom: 0pt;
-	width: 100%;
-	overflow-y: scroll; /* scroll instead of auto to ensure that pw_table's width will always match that of header_table */
+
+table#filter_table {
+  height: 34pt;
 }
 
 table#pw_table {
 	width: 100%;
 }
 
+table#filter_table tr,
 table#header_table tr {
 	background: #f6f6f6;
 }
@@ -127,7 +125,7 @@ table#pw_table tr:nth-child(odd) td:nth-child(even) {
 	background: #f6f6f6;
 }
 
-table#header_table th, table#pw_table td {
+table#header_table th, table#filter_table th, table#pw_table td {
 	width: 34%;
 	padding: 4pt 6pt 4pt 6pt;
 	text-align: left;
@@ -137,19 +135,24 @@ table#header_table th, table#pw_table td {
 	vertical-align: baseline;
 }
 
-table#header_table th:first-child, table#pw_table td:first-child {
+ 
+table#header_table th:first-child, table#filter_table th:first-child, table#pw_table td:first-child {
 	width: 39%;
 	padding-left: 8pt;
 }
 
-table#header_table th:last-child, table#pw_table td:last-child {
+table#header_table th:last-child, table#filter_table th:last-child, table#pw_table td:last-child {
 	/* width: 27%; */
 	width: 62pt;
 	padding-right: 8pt;
 	text-overflow: clip;
 }
 
-table#header_table img, table#pw_table img {
+#filter_table th:first-child {
+  width: 100%;
+}
+
+table#header_table img, table#filter_table img, table#pw_table img {
 	width: 14pt;
 	height: 14pt;
 	background: #e6e6e6;
@@ -159,7 +162,7 @@ table#header_table img, table#pw_table img {
 	margin-right: 2pt;
 }
 
-table#header_table img:active, table#pw_table img:active {
+table#header_table img:active, table#filter_table img:active, table#pw_table img:active {
 	background: #77c4e1;
 }
 
@@ -286,4 +289,8 @@ div#toaster p {
 	font-size: 11pt;
 	color: #eeeeee;
 	background: #333333;
+}
+
+tr.filtered {
+  display: none;
 }
